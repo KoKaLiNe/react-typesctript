@@ -1,0 +1,36 @@
+@import './components/reset';
+@import './components/colors';
+@import './components/mixins';
+@import './components/card';
+@import './components/buttons';
+@import './components/board';
+@import './components/board-task';
+@import './components/board-user';
+@import './components/dropdown';
+@import './components/main';
+@import './components/modal';
+@import './components/filter';
+@import './components/inputs';
+@import '../components/taskStatus/taskStatus';
+@import '../components/taskRank/taskRank';
+
+#root {
+    height: 100vh;
+}
+
+.active-lnk {
+    border-bottom: 2px;
+    border-style: solid;
+    border-color: $primaryColor;
+}
+
+.pagination {
+    @include flexible;
+    align-items: center;
+    flex-direction: row;
+    vertical-align: middle;
+
+    &__count {
+        color: #B5B5B5;
+    }
+}

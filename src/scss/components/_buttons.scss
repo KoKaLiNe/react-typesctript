@@ -1,0 +1,69 @@
+.btn {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    border: none;
+    @include border-radius(5px);
+    cursor: pointer;
+    padding: 2px 20px;
+    @include btn-default;
+    text-decoration: none;
+
+    & a {
+        color: inherit;
+        text-decoration: none;
+
+    }
+
+    &-link {
+        @include btn-link;
+        color: inherit;
+    }
+
+    &-default {
+        @include btn-default;
+    }
+
+    &-primary {
+        @include btn-primary;
+    }
+
+    &-success {
+        @include btn-success;
+    }
+
+    &-error {
+        @include btn-error;
+    }
+
+    &-submit {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    &-pagination {
+        margin-right: 5px;
+        padding: 0 7.5px;
+
+        &.active {
+            @include btn-primary;
+        }
+
+        &:disabled {
+            @include btn-disabled;
+            cursor: default;
+        }
+    }
+
+    &-prev,
+    &-next {
+        padding: 0 10px;
+    }
+
+    &-board__header {
+        margin-left: 10px;
+    }
+
+    &__comment {
+        color: $errorColor;
+    }
+}

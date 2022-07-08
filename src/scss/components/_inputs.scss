@@ -1,0 +1,71 @@
+.field {
+    @include flexible;
+    flex-direction: column;
+}
+
+.select {
+    @include input-default;
+    margin-bottom: 20px;
+    padding-right: 10px;
+    appearance: none;
+    overflow: hidden;
+    background: url('../../../public/img/icons/select-arrow.svg') no-repeat center;
+    background-position: 98%;
+}
+
+.label {
+    font-family: 'Roboto', sans-serif;
+    @include font ($size: 16px, $weight: false);
+    color: #CCCCCC;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.input {
+    @include input-default;
+    resize: none;
+    width: 100%;
+    margin-bottom: 20px;
+
+    &::placeholder {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        color: $labelFontColor;
+    }
+
+    &__comment {
+        max-width: 458px;
+        height: 76px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+
+    &__modal {
+        margin-bottom: 0;
+
+        &-comment {
+            height: 76px;
+            margin-bottom: 0;
+        }
+    }
+
+    &__card {
+        &-description {
+            height: 607px;
+            margin-bottom: 0;
+        }
+    }
+
+    &__modal {
+        height: 24px;
+        padding: 2.5px 10px;
+        margin-bottom: 20px;
+    }
+
+    &-filter {
+        height: 27px;
+        padding: 2.5px 10px;
+        margin: -1px;
+        max-width: 527px;
+    }
+}

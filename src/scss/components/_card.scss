@@ -1,0 +1,75 @@
+.card {
+    height: 100%;
+
+    @include card;
+
+    &__col {
+        &.create {
+            border-right: none;
+        }
+    }
+
+    &.error {
+        color: $errorColor;
+        height: 50px;
+        margin-top: 24px;
+        margin-bottom: 38px;
+        margin-left: -31px;
+    }
+
+    &__user-img {
+        width: 182px;
+        height: 182px;
+        @include border-radius(50%);
+        cursor: pointer;
+
+        &-wrapper {
+            width: 186px;
+            height: 186px;
+            background: conic-gradient(#FF6161, #7B61FF, #FF6161, #7B61FF, #FF6161, #7B61FF, #FF6161);
+            padding: 2.3px;
+            @include border-radius(50%);
+            margin-bottom: 20px;
+        }
+    }
+
+    &__title {
+        color: $labelFontColor;
+        margin-bottom: 8px;
+    }
+
+    &__text {
+        margin-bottom: 20px;
+
+        &:last-of-type {
+            margin-bottom: 5px;
+        }
+    }
+
+    &__decription {
+        margin-bottom: 20px;
+        line-height: 19px;
+        text-indent: 20px;
+        white-space: pre-line;
+    }
+
+    &__form {
+        margin-bottom: 20px;
+    }
+
+    &__comments {
+        max-height: 555px;
+        overflow-y: auto;
+    }
+}
+
+.comment {
+    margin-bottom: 20px;
+
+    &__title {
+        @include flexible;
+        align-items: center;
+        color: $labelFontColor;
+        margin-bottom: 5px;
+    }
+}

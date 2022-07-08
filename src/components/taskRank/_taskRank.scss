@@ -1,0 +1,28 @@
+.task-prioirity {
+    display: flex;
+    flex-direction: row;
+    align-items: middle;
+
+    font-size: 14px;
+
+    & svg {
+        transform: translateY(25%);
+        margin-right: 5px;
+    }
+
+    &.low {
+        color: $successColor;
+    }
+
+    &.mid {
+        color: #E9B500;
+
+        & svg {
+            transform: translateY(50%);
+        }
+    }
+
+    &.high {
+        color: $errorColor;
+    }
+}

@@ -1,0 +1,10 @@
+.user__name {
+    display: flex;
+    align-items: center;
+    height: 31px;
+
+    & a {
+        text-decoration: none;
+        color: inherit;
+    }
+}

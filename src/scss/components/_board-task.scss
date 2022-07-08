@@ -1,0 +1,51 @@
+.board__task {
+    &-link {
+        @include flexible;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+
+        text-decoration: none;
+        color: inherit;
+    }
+
+    &-type {
+        width: 100%;
+        max-width: 73px;
+        margin-right: 14px;
+    }
+
+    &-header {
+        width: 100%;
+        max-width: 500px;
+        margin-right: 14px;
+
+        & a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+
+    &-user {
+        width: 100%;
+        max-width: 200px;
+        margin-right: 14px;
+    }
+
+    &-status {
+        width: 100%;
+        max-width: 120px;
+        margin-right: 14px;
+    }
+
+    &-rank {
+        width: 100%;
+        max-width: 80px;
+    }
+
+    &-menu {
+        width: 100%;
+        max-width: 140px;
+    }
+}

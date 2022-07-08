@@ -1,0 +1,122 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        background-color: #E5E5E5;
+        height: calc(100vh - 60px);
+    }
+
+    &__error {
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        text-transform: uppercase;
+        margin-top: 40vh;
+
+        &-title {
+            margin-bottom: 20px;
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+
+        background-color: #FFFFFF;
+        padding: 8px 0 8px 20px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        position: relative;
+        z-index: 10;
+
+        &-wrap {
+            width: 60%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__lnk {
+        font-family: 'Open Sans', sans-serif;
+        @include font ($size: 24px, $weight: false);
+        text-decoration: none;
+        margin-right: 10px;
+        padding-bottom: 12px;
+        color: $fontColor;
+    }
+
+    &__user {
+        &-profile {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        &-name {
+            font-family: 'Roboto', sans-serif;
+            @include font ($size: 16px, $weight: false);
+            margin-right: 10px;
+        }
+
+        &-img {
+            width: 40px;
+            height: 40px;
+            @include border-radius(50%);
+            cursor: pointer;
+
+            &-wrapper {
+                max-width: 42px;
+                max-height: 42px;
+                background: conic-gradient(#FF6161, #7B61FF, #FF6161, #7B61FF, #FF6161, #7B61FF, #FF6161);
+                padding: 1px;
+                @include border-radius(50%);
+            }
+        }
+    }
+
+    &__login {
+        &-from {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 200px;
+            background-color: #FFFFFF;
+            width: 300px;
+            height: 288px;
+            @include border-radius(2%);
+            box-shadow: 0 0 5px #B5B5B5;
+        }
+
+        &-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+            width: 240px;
+        }
+
+        &-title {
+            font-family: 'Roboto', sans-serif;
+            @include font ($size: 24px, $weight: 300);
+            margin-bottom: 30px;
+        }
+
+        &-field {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        &-error {
+            font-family: 'Roboto', sans-serif;
+            @include font ($size: 14px, $weight: 300);
+            color: $errorColor;
+            margin-top: 8px;
+        }
+    }
+}

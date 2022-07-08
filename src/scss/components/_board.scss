@@ -1,0 +1,95 @@
+$boardBGColor: #FFFFFF;
+
+.board {
+    width: 100%;
+    max-width: 1280px;
+    margin-top: 30px;
+
+    &__item {
+        font-family: 'Roboto', sans-serif;
+        @include flexible;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        height: 10%;
+        padding: 0 30px;
+
+        &:nth-child(2n) {
+            background-color: #F2F2F2;
+        }
+    }
+
+
+    &__header {
+        font-family: 'Roboto', sans-serif;
+        @include flexible;
+        align-items: center;
+        margin-bottom: 20px;
+
+
+        &-title {
+            @include font ($size: 24px, $weight: 300);
+
+            &.task-title {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-right: 10px;
+            }
+        }
+
+        &-text {
+            margin-right: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 410px;
+            cursor: default;
+        }
+
+        &-btns {
+            text-align: end;
+        }
+    }
+
+    &__filter {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        height: 755px;
+        background-color: $boardBGColor;
+        padding: 20px;
+        @include border-radius(5px);
+        box-shadow: 0 0 5px #B5B5B5;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin-bottom: 18px;
+        position: relative;
+
+        @include border-radius(10px);
+
+        &:after {
+            content: "";
+            width: calc(100% + 20px);
+            height: calc(100% + 20px);
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            box-sizing: border-box;
+            @include border-radius(17px);
+            border: 10px solid #FFFFFF;
+            box-shadow: inset 0 0 5px #b5b5b5;
+            pointer-events: none;
+        }
+    }
+}

@@ -10,64 +10,64 @@ import Edit from "../../pages/edit/edit";
 import Error404 from "../../pages/error404/error404";
 import { tasks, users } from "../../store/index";
 
-const App = observer(() => {
-    useEffect(() => {
-        tasks.fetch();
-        users.fetch();
-    }, []);
+const App = observer((): JSX.Element => {
+  useEffect(() => {
+    tasks.fetch();
+    users.fetch();
+  }, []);
 
-    if (tasks.data.length === 0 && users.data.length === 0) {
-        return (
-            <>
-                <section className="main__header">
-                    <img src="../../img/logo.svg" alt="логотип" />
-                    <section className="main__header-wrap">
-                        <div className="main__header-group-link">
-                            <div className="main__user-profile  dropdown">
-                                <div className="main__user-img-wrapper  "></div>
-                            </div>
-                        </div>
-                    </section>
-                </section>
-                <section className="main__wrapper">
-                    <div className="main__error">
-                        <img
-                            src="../../img/icons/load-spinner.gif"
-                            alt=""
-                            width="64"
-                            height="64"
-                        />
-                    </div>
-                </section>
-            </>
-        );
-    } else {
-        return (
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/" exact>
-                        <Redirect to={AppRoute.LOGIN} />
-                    </Route>
-                    <Route path={AppRoute.LOGIN} exact>
-                        <Login />
-                    </Route>
-                    <Route path={AppRoute.TASK} exact>
-                        <Main tasks={tasks.data} users={users.data} />
-                    </Route>
-                    <Route path={AppRoute.EDIT} exact>
-                        <Edit tasks={tasks.data} users={users.data} />
-                    </Route>
-                    <Route path={AppRoute.ADD_TASK_TO_USER} exact>
-                        <Edit tasks={tasks.data} users={users.data} />
-                    </Route>
-                    <Route path={AppRoute.USER} exact>
-                        <Users tasks={tasks.data} users={users.data} />
-                    </Route>
-                    <Route component={Error404}></Route>
-                </Switch>
-            </BrowserRouter>
-        );
-    }
+  if (tasks.data.length === 0 && users.data.length === 0) {
+    return (
+      <>
+        <section className="main__header">
+          <img src="../../img/logo.svg" alt="логотип" />
+          <section className="main__header-wrap">
+            <div className="main__header-group-link">
+              <div className="main__user-profile  dropdown">
+                <div className="main__user-img-wrapper  "></div>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section className="main__wrapper">
+          <div className="main__error">
+            <img
+              src="../../img/icons/load-spinner.gif"
+              alt=""
+              width="64"
+              height="64"
+            />
+          </div>
+        </section>
+      </>
+    );
+  } else {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact>
+            <Redirect to={AppRoute.LOGIN} />
+          </Route>
+          <Route path={AppRoute.LOGIN} exact>
+            <Login />
+          </Route>
+          <Route path={AppRoute.TASK} exact>
+            <Main />
+          </Route>
+          <Route path={AppRoute.EDIT} exact>
+            <Edit />
+          </Route>
+          <Route path={AppRoute.ADD_TASK_TO_USER} exact>
+            <Edit />
+          </Route>
+          <Route path={AppRoute.USER} exact>
+            <Users />
+          </Route>
+          <Route component={Error404}></Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 });
 
 export default App;

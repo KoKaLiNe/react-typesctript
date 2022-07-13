@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-const Error404 = () => {
+const Error404 = (): JSX.Element => {
     const hist = useHistory()
     return (
         <>

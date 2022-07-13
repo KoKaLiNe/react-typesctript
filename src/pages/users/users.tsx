@@ -3,16 +3,15 @@ import Header from "../../components/header/header";
 import Board from "../../components/board/board";
 import { observer } from "mobx-react-lite";
 
-const Users = observer(({ tasks, users }) => {
-
-    return (
-        <>
-            <Header />
-            <section className="main__wrapper">
-                <Board tasks={tasks} users={users} />
-            </section>
-        </>
-    )
-})
+const Users = observer((): JSX.Element => {
+  return (
+    <>
+      <Header />
+      <section className="main__wrapper">
+        <Board />
+      </section>
+    </>
+  );
+});
 
 export default Users;

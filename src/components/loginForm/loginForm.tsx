@@ -6,18 +6,25 @@ import { users } from "../../store";
 import { api } from "../../api";
 
 
-const LoginForm = observer(() => {
+const LoginForm = observer((): JSX.Element  => {
+    interface ILoginForm {
+        login: string;
+        password: string;
+    }
 
-    const [form, setForm] = useState([])
+    const [form, setForm] = useState<ILoginForm>({
+        login: '',
+        password: '',
+    })
 
-    const [checkLogin, secheckLogin] = useState(false)
+    const [checkLogin, secheckLogin] = useState('')
 
-    const handleFieldChange = action((e) => {
+    const handleFieldChange = action((e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value })
     })
 
-    const handleSubmit = action((e) => {
+    const handleSubmit = action((e: { preventDefault: () => void }) => {
         e.preventDefault();
 
         api.loginIn(form.login, form.password)

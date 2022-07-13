@@ -2,42 +2,50 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import UserItem from "../userItem/userItem";
 import Pagination from "../pagination/pagination";
+import { ITaskData, IUserData } from "../../store/interfaces";
 
+interface IProps {
+  tasks: ITaskData[];
+  users: IUserData[];
+}
 
-const UsersList = observer(({ tasks, users }) => {
+const UsersList = observer((props: IProps): JSX.Element => {
+  const { users } = props;
+  const [page, setPage] = useState<number>(1);
+  const total = users.length;
+  const itemsPerPage = 10;
+  const handleChangeCounter = (value: number): void => {
+    setPage(value);
+  };
+  
+  return (
+    <>
+      <section className="board">
+        <div className="board__header">
+          <h2 className="board__header-title  user-title">Пользователи</h2>
+        </div>
 
-    const [startStep, setStartStep] = useState(1)
-    const [endStep, setEndStep] = useState(10)
-    const [currentPage, setCurrentPage] = useState(1);
-    const arrayLength = users.length
+        <section className="board__content">
+          <div className="board__list">
+            {users
+              .slice(
+                (page - 1) * itemsPerPage,
+                (page - 1) * itemsPerPage + itemsPerPage
+              )
+              .map((user) => (
+                <UserItem {...user} key={user.id} />
+              ))}
+          </div>
+          <Pagination
+            page={page}
+            itemsPerPage={itemsPerPage}
+            total={total}
+            onChangePage={handleChangeCounter}
+          />
+        </section>
+      </section>
+    </>
+  );
+});
 
-    const props = {
-        arrayLength,
-        startStep,
-        setStartStep,
-        endStep,
-        setEndStep,
-        currentPage,
-        setCurrentPage
-    }
-
-    return (
-        <>
-            <section className="board">
-                <div className="board__header">
-                    <h2 className="board__header-title  user-title">Пользователи</h2>
-                </div>
-
-                <section className="board__content">
-                    <div className="board__list">
-                        {users.slice(startStep - 1, endStep).map(user => <UserItem {...user} key={user.id} />)}
-                    </div>
-                    <Pagination props={props} />
-                </section>
-
-            </section>
-        </>
-    )
-})
-
-export default UsersList
+export default UsersList;

@@ -10,11 +10,11 @@ import { IUserData, ParamsTypes, IComment } from "../../store/interfaces";
 interface IProps {
   isVisible: boolean;
   onClose: () => void;
-  setComments?: (comments: IComment) => void;
+  onClickOk?: (value: IComment[]) => void;
 }
 
 const Modal = observer((prpos: IProps): JSX.Element => {
-  const { isVisible, onClose, setComments } = prpos;
+  const { isVisible, onClose, onClickOk } = prpos;
   const { pathname } = useLocation<ParamsTypes>();
   const { id } = useParams<ParamsTypes>();
 
@@ -41,7 +41,7 @@ const Modal = observer((prpos: IProps): JSX.Element => {
   const [timeForm, setTimeForm] = useState({
     timeInMinutes: pathname === `${AppRoute.TASK_LIST}/${id}` && null,
     timeUnit: pathname === `${AppRoute.TASK_LIST}/${id}` && "minute",
-    comment: pathname === `${AppRoute.TASK_LIST}/${id}` && null,
+    comment: pathname === `${AppRoute.TASK_LIST}/${id}` && "",
     currentUser: users.loggedUser.id,
   });
 
@@ -101,7 +101,7 @@ const Modal = observer((prpos: IProps): JSX.Element => {
           currentUser: users.loggedUser.id,
         });
       }
-      await api.getComments(id).then((data) => setComments(data));
+      await api.getComments(id).then((data) => onClickOk(data));
       onClose();
     }
   }

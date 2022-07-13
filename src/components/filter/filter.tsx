@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { action, runInAction } from "mobx";
 import { observer } from "mobx-react-lite";
 import { tasks, users } from "../../store";
+import { ITasksFilter } from "../../store/interfaces";
 
-const Filter = observer((): JSX.Element  => {
-
+const Filter = observer((): JSX.Element => {
   const [checkedTypeState, setCheckedTypeState] = useState(
     new Array(tasks.type.length).fill(false)
   );
@@ -19,15 +19,15 @@ const Filter = observer((): JSX.Element  => {
     new Array(tasks.rank.length).fill(false)
   );
 
-  const [typeCheck, setTypeCheck] = useState([]);
-  const [userCheck, setUserCheck] = useState([]);
+  const [typeCheck, setTypeCheck] = useState<string[]>([]);
+  const [userCheck, setUserCheck] = useState<string[]>([]);
   const [query, setQuery] = useState({
-    value: ""
+    value: "",
   });
-  const [statusCheck, setStatusCheck] = useState([]);
-  const [rankCheck, setRankCheck] = useState([]);
+  const [statusCheck, setStatusCheck] = useState<string[]>([]);
+  const [rankCheck, setRankCheck] = useState<string[]>([]);
 
-  const filter = {
+  const filter: ITasksFilter = {
     query: query.value,
     assignedUsers: userCheck,
     type: typeCheck,
@@ -91,11 +91,13 @@ const Filter = observer((): JSX.Element  => {
     setUserCheck(totalUserFilter);
   };
 
-  //  Фильтрация по имени задачи
-  const handleChangeTheme = action((e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = e.target;
-    setQuery({ ...query, value });
-  });
+  //  Фильтрация по Названиюи задачи
+  const handleChangeTheme = action(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      const { value } = e.target;
+      setQuery({ ...query, value });
+    }
+  );
 
   // Фильтрация по Приоритету
   const handleChangeStatus = (position: number) => {

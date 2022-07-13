@@ -10,7 +10,9 @@ interface IProps {
 
 const StatusBtn = observer((props: IProps): JSX.Element => {
   const { id } = props;
+
   let currentTask: ITaskData;
+
   if (tasks.data.find((x) => x.id === id) === undefined) {
     currentTask = tasks.mock;
   } else {
@@ -28,45 +30,42 @@ const StatusBtn = observer((props: IProps): JSX.Element => {
     tasks.editStatus(id, value);
   };
 
-  const handleChangeStatus = action((
-    // e
-    ) => {
-    // e.preventDefault();
-    // if (e.target.value === "inProgress") {
-    //   if (startStatus === "opened") {
-    //     setStatus(id, e.target.value);
-    //   }
-    // } else if (e.target.value === `testing`) {
-    //   if (startStatus === "inProgress") {
-    //     setStatus(id, e.target.value);
-    //   }
-    // } else if (e.target.value === `opened`) {
-    //   if (
-    //     startStatus === "inProgress" ||
-    //     startStatus === "testing" ||
-    //     startStatus === "complete"
-    //   ) {
-    //     setStatus(id, e.target.value);
-    //   }
-    // } else if (e.target.value === `complete`) {
-    //   if (
-    //     startStatus === "opened" ||
-    //     startStatus === "inProgress" ||
-    //     startStatus === "testing"
-    //   ) {
-    //     setStatus(id, e.target.value);
-    //   }
-    // }
+  const handleChangeStatus = action((value: string): void => {
+    if (value === "inProgress") {
+      if (startStatus === "opened") {
+        setStatus(id, value);
+      }
+    } else if (value === `testing`) {
+      if (startStatus === "inProgress") {
+        setStatus(id, value);
+      }
+    } else if (value === `opened`) {
+      if (
+        startStatus === "inProgress" ||
+        startStatus === "testing" ||
+        startStatus === "complete"
+      ) {
+        setStatus(id, value);
+      }
+    } else if (value === `complete`) {
+      if (
+        startStatus === "opened" ||
+        startStatus === "inProgress" ||
+        startStatus === "testing"
+      ) {
+        setStatus(id, value);
+      }
+    }
   });
 
   const inProgressBtn = () => {
     if (startStatus === "opened") {
+      const value = "inProgress";
       return (
         <>
           <button
             className="btn-board__header  btn"
-            onClick={handleChangeStatus}
-            value="inProgress"
+            onClick={() => handleChangeStatus(value)}
           >
             Взять в работу
           </button>
@@ -77,12 +76,12 @@ const StatusBtn = observer((props: IProps): JSX.Element => {
 
   const testingBttn = () => {
     if (startStatus === "inProgress") {
+      const value = "testing";
       return (
         <>
           <button
             className="btn-board__header  btn"
-            onClick={handleChangeStatus}
-            value="testing"
+            onClick={() => handleChangeStatus(value)}
           >
             На тестирование
           </button>
@@ -92,6 +91,7 @@ const StatusBtn = observer((props: IProps): JSX.Element => {
   };
 
   const completeBtn = () => {
+    const value = "complete";
     if (
       startStatus === "opened" ||
       startStatus === "testing" ||
@@ -101,8 +101,7 @@ const StatusBtn = observer((props: IProps): JSX.Element => {
         <>
           <button
             className="btn-board__header  btn"
-            onClick={handleChangeStatus}
-            value="complete"
+            onClick={() => handleChangeStatus(value)}
           >
             Сделано
           </button>
@@ -112,6 +111,7 @@ const StatusBtn = observer((props: IProps): JSX.Element => {
   };
 
   const openedBtn = () => {
+    const value = "opened";
     if (
       startStatus === "complete" ||
       startStatus === "inProgress" ||
@@ -121,8 +121,7 @@ const StatusBtn = observer((props: IProps): JSX.Element => {
         <>
           <button
             className="btn-board__header  btn"
-            onClick={handleChangeStatus}
-            value="opened"
+            onClick={() => handleChangeStatus(value)}
           >
             Переоткрыть
           </button>

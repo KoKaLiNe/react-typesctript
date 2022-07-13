@@ -169,7 +169,11 @@ const TaskCard = observer((): JSX.Element => {
       );
   }
 
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<IComment[]>([]);
+
+  const handleSetComment = (value: IComment[]): void => {
+    setComments(value);
+  };
 
   useEffect(() => {
     api.getComments(id).then((data) => setComments(data));
@@ -268,7 +272,7 @@ const TaskCard = observer((): JSX.Element => {
       <Modal
         isVisible={isModal}
         onClose={() => setModal(false)}
-        // setComments={setComments}
+        onClickOk={handleSetComment}
       />
     </>
   );

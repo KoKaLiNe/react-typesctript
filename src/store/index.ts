@@ -1,9 +1,14 @@
 import { makeAutoObservable } from "mobx";
 import { api } from "../api";
-import { ITaskData, IUserData, IWorkTime, ITasksFilter } from "../store/interfaces";
+import {
+  ITaskData,
+  IUserData,
+  IWorkTime,
+  ITasksFilter,
+} from "../store/interfaces";
 import { AxiosResponse } from "axios";
 
-// // ЗАДАЧИ
+// ЗАДАЧИ
 class TasksStore {
   data: ITaskData[] = [];
   currentUserTasks: ITaskData[] = [];
@@ -20,7 +25,6 @@ class TasksStore {
     timeInMinutes: 0,
     status: "opened",
     rank: "low",
-    length: 0,
   };
   type = [
     {

@@ -53,7 +53,7 @@ const Board = observer((): JSX.Element => {
               <TaskStatus status={currentTask.status} />
             </div>
             <div className="board__header-btns">
-              {/* <StatusBtn id={id} /> */}
+              <StatusBtn id={id} />
               <Link
                 to={`/edit/${id}`}
                 className="btn-board__header  btn-primary  btn"
@@ -92,10 +92,13 @@ const Board = observer((): JSX.Element => {
 
   // ВЫБРАННЫЙ ПОЛЬЗОВАТЕЛЬ
   else if (pathname === `${AppRoute.USER_LIST}/${id}`) {
+    const currentUserTasks = tasks.currentUserTasks.filter(
+      (x) => x.assignedId === id
+    );
     return (
       <>
         <section className="board">
-          <UserCard />
+          <UserCard userTasks={currentUserTasks}/>
         </section>
       </>
     );

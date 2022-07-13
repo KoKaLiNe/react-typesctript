@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 import { AppRoute } from "../../const";
 import { IUserData } from "../../store/interfaces";
 
-const UserItem = observer(({ id, username }: IUserData): JSX.Element => {
+interface IProps {
+  user: IUserData;
+}
+
+const UserItem = observer((props: IProps): JSX.Element => {
+  const { user } = props;
+  const { id, username } = user;
   return (
     <>
       <div className="board__item">

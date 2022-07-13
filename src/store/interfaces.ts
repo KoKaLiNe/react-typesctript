@@ -11,7 +11,6 @@ export interface ITaskData {
   timeInMinutes?: number | string;
   status?: IStatus;
   rank?: IRank;
-  length?: number;
 }
 
 export interface IUserData {
@@ -22,11 +21,14 @@ export interface IUserData {
   username?: string;
   about?: string;
   photoUrl?: string;
-  length?: number;
 }
 
-export interface ITasksFilter extends ITaskData {
+export interface ITasksFilter {
   query?: string;
+  assignedUsers?: string[];
+  type?: string[];
+  status?: string[];
+  rank?: string[];
 }
 
 export interface IProps {
@@ -40,9 +42,8 @@ export interface ParamsTypes {
 }
 
 export type IRank = "low" | "medium" | "high";
-
 export type IStatus = "opened" | "inProgress" | "testing" | "complete";
-
+export type IType = "task" | "bug";
 export interface IWorkTime {
   timeInMinutes: number;
   comment: string;

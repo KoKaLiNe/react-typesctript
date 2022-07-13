@@ -33,7 +33,7 @@ const UsersList = observer((props: IProps): JSX.Element => {
                 (page - 1) * itemsPerPage + itemsPerPage
               )
               .map((user) => (
-                <UserItem {...user} key={user.id} />
+                <UserItem user={user} key={user.id} />
               ))}
           </div>
           <Pagination

@@ -6,11 +6,15 @@ import { AppRoute } from "../../const";
 import Modal from "../modal/modal";
 import { observer } from "mobx-react-lite";
 import { tasks, users } from "../../store";
-import { ParamsTypes, IUserData } from "../../store/interfaces";
+import { ParamsTypes, IUserData, ITaskData } from "../../store/interfaces";
 
-const UserCard = observer((): JSX.Element => {
+interface IProps {
+  userTasks?: ITaskData[];
+}
+
+const UserCard = observer((props: IProps): JSX.Element => {
+  const { userTasks } = props;
   const { id } = useParams<ParamsTypes>();
-
   const [loggedUser, setLoggedUser] = useState<IUserData>(null);
 
   if (loggedUser === null && localStorage.length > 0) {
@@ -20,30 +24,20 @@ const UserCard = observer((): JSX.Element => {
   let currentUser: IUserData;
 
   if (users.data.find((x) => x.id === id) === undefined) {
-    currentUser = tasks.mock;
+    currentUser = users.mock;
   } else {
     currentUser = users.data.find((x) => x.id === id);
   }
 
   // Пагинация
-  const [startStep, setStartStep] = useState(1);
-  const [endStep, setEndStep] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
-  const arrayLength = tasks.currentUserTasks.filter(
-    (x) => x.assignedId === id
-  ).length;
+  const [page, setPage] = useState<number>(1);
+  const total = userTasks.length;
+  const itemsPerPage = 10;
+  const handleChangeCounter = (value: number): void => {
+    setPage(value);
+  };
 
   const [isModal, setModal] = useState(false);
-
-  // const props = {
-  //   arrayLength,
-  //   startStep,
-  //   setStartStep,
-  //   endStep,
-  //   setEndStep,
-  //   currentPage,
-  //   setCurrentPage,
-  // };
 
   const setDefaulUserPic = () => {
     if (currentUser.photoUrl === null || currentUser.photoUrl === undefined) {
@@ -69,7 +63,7 @@ const UserCard = observer((): JSX.Element => {
           <button
             onClick={() => setModal(true)}
             className="btn-board__header  btn-primary  btn"
-            // disabled={loggedUser.id === undefined || loggedUser.id !== id}
+            disabled={loggedUser === null || loggedUser.id !== id}
           >
             Редактировать
           </button>
@@ -93,25 +87,26 @@ const UserCard = observer((): JSX.Element => {
           <div className="card__col  col-2  user--card">
             <p className="card__title">Задачи</p>
             <div className="board__list">
-              {tasks.currentUserTasks
-                .filter((x) => x.assignedId === id)
-                .slice(startStep - 1, endStep)
+              {userTasks
+                .slice(
+                  (page - 1) * itemsPerPage,
+                  (page - 1) * itemsPerPage + itemsPerPage
+                )
                 .map((task) => (
-                  <TaskItem
-                    task={task}
-                    key={task.id}
-                  />
+                  <TaskItem task={task} key={task.id} />
                 ))}
             </div>
-            {/* <Pagination props={props} /> */}
+            <Pagination
+              page={page}
+              itemsPerPage={itemsPerPage}
+              total={total}
+              onChangePage={handleChangeCounter}
+            />
           </div>
         </div>
       </section>
 
-      <Modal
-        isVisible={isModal}
-        onClose={() => setModal(false)}
-      />
+      <Modal isVisible={isModal} onClose={() => setModal(false)} />
     </>
   );
 });
